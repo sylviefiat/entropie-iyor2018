@@ -12,6 +12,12 @@ function positionSlide(slide) {
 		currentSlide = slide;
 		slideArray[currentSlide].fadeIn(1500, 'swing');
 	}
+	if(slide > 1){
+		$("#bgvid").css("display", "none");
+	}
+	if(slide === 1){
+		$("#bgvid").css("display", "block");
+	}
 }
 
 function nextSlide() {
@@ -49,4 +55,26 @@ $(function() {
 	});
 	$(document).keyup(handleKeyup);
 	slideArray[currentSlide].css("display", "flex");
+	
 });
+
+
+document.addEventListener("wheel", function (e) {
+	if(currentSlide !== 3)
+	{
+		if(e.deltaY < 0)
+			prevSlide();
+		else
+			nextSlide();
+	} else {
+		var $div = $('.images'),
+      	max = -($div.width() - $(window).width());
+		// new position = old position + deltaY
+	    var posX = $div.offset().left -= e.deltaY;
+	    // boundaries calculation
+	    if(posX >= 0) { posX = 0; }
+	    if(posX <= max) { posX = max; }
+	    // update position
+	    $div.offset({left: posX});
+	}
+}, true);

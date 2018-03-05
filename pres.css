@@ -1,6 +1,6 @@
 body {
 	overflow: hidden;
-	background-color: #000;
+	background-color: #333;
 }
 /*
  * Adapted from http://demosthenes.info/blog/777/Create-Fullscreen-HTML5-Page-Background-Video
@@ -25,11 +25,95 @@ body {
 	justify-content: center;
 }
 .content {
+	text-align: left;
+}
+.diapos {
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: flex-start;
+}
+.images {
+	display: flex;
+}
+.images a:hover {
+	cursor: pointer;
+	
+}
+.acant, .cora {
+   	position: relative;
+}
+.acanthaster, .corail {
+	display: none;
+	float: left;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #FFFFFF;
+    font-weight: bold;
+    text-align: center;
+    font-weight: bold;
+    font-size: 28px;
+}
+.acanthaster p, .corail p {	
+    padding-top:20px;
+}
+.acant:hover .acanthaster,.cora:hover .corail {
+	display: block;
+}
+
+.half {
+	width: 50%;
+	padding: 0 150px;
+}
+.top {
+	width: 100%;
 	text-align: center;
+}
+.title {
+	font-weight: bolder;
+	font-size: 30px;
+	font-family: sans-serif;
+}
+.cite, .author {
+	color: #777;
+}
+.cite {
+	font-style: italic;
+}
+.grey {
+	border-color: #777;
+}
+.oreanet {
+	background-image: url("acanthaster_bg.jpg");
+	background-size: cover;
+}
+h1, h2 {
+	color: white;
+	font-family: sans-serif;
+	text-align: left;
+	font-weight: lighter;
+}
+h1 {
+	font-size: 5em;
+}
+h2 {
+	font-size: 3em;
 }
 p {
 	margin: 0.5em;
-	font: bold 4em sans-serif;
+	font: bold 1.1em serif;
 	color: #fff;
 	text-shadow: 5px 5px 20px rgba(0, 0, 0, 1);
+	line-height: 1.6;
+}
+footer {
+	text-align: left;
+	color: #BBB;
+	position: fixed;
+	bottom: 20px;
+	left: 50px;
 }
