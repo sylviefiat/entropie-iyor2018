@@ -6,18 +6,22 @@ var slideCount = 0;
 var slideArray = [];
 var currentSlide = 1;
 
+var players = [];
+var playingID = null;
+
 function positionSlide(slide) {
 	if (slide > 0 && slide <= slideCount) {
 		slideArray[currentSlide].fadeOut(500);
 		currentSlide = slide;
 		slideArray[currentSlide].fadeIn(1500, 'swing');
+		// display background video on first slide only
+		$("#bgvid").css("display", (slide>1)?"none":"block");
+		// start video player on current slide
+		if(slideArray[currentSlide].find("iframe")!==null && slideArray[currentSlide].find("iframe").length > 0){
+			
+		}
 	}
-	if(slide > 1){
-		$("#bgvid").css("display", "none");
-	}
-	if(slide === 1){
-		$("#bgvid").css("display", "block");
-	}
+
 }
 
 function nextSlide() {
@@ -48,6 +52,7 @@ var handleKeyup = function(e) {
 };
 
 $(function() {
+	// slide loading in array
 	$(".slide").each(function () {
 		slideCount++;
 		$(this).css("display", "none");
@@ -55,9 +60,8 @@ $(function() {
 	});
 	$(document).keyup(handleKeyup);
 	slideArray[currentSlide].css("display", "flex");
-	
-});
 
+});
 
 document.addEventListener("wheel", function (e) {
 	if(currentSlide !== 3)

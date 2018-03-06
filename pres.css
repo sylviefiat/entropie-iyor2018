@@ -39,11 +39,13 @@ body {
 	cursor: pointer;
 	
 }
-.acant, .cora {
+.acant, .cora, .req, .suc {
    	position: relative;
 }
-.acanthaster, .corail {
+.para {
 	display: none;
+    flex-direction: column;
+    justify-content: space-evenly;
 	float: left;
     position: absolute;
     left: 0px;
@@ -53,21 +55,31 @@ body {
     z-index: 1000;
     background-color: rgba(0, 0, 0, 0.5);
     color: #FFFFFF;
-    font-weight: bold;
+}
+.para h3  {	
     text-align: center;
     font-weight: bold;
     font-size: 28px;
-}
-.acanthaster p, .corail p {	
     padding-top:20px;
 }
-.acant:hover .acanthaster,.cora:hover .corail {
-	display: block;
+.para p {   
+    text-align:right;
+    font-size: 20px;
+    padding: 0 20px;
+}
+.acant:hover .acanthaster,.cora:hover .corail,.req:hover .requin,.suc:hover .super {
+	display: flex;
 }
 
 .half {
 	width: 50%;
-	padding: 0 150px;
+}
+.half div {
+   padding: 0 150px;  
+}
+.third {
+    padding: 0 150px;
+    width: 50%;
 }
 .top {
 	width: 100%;
@@ -87,11 +99,14 @@ body {
 .grey {
 	border-color: #777;
 }
-.oreanet {
-	background-image: url("acanthaster_bg.jpg");
-	background-size: cover;
+.video{
+    padding:0;
 }
-h1, h2 {
+.video iframe {
+    width: 100%;
+    height: 100%;
+}
+h1, h2, h3 {
 	color: white;
 	font-family: sans-serif;
 	text-align: left;
@@ -102,6 +117,9 @@ h1 {
 }
 h2 {
 	font-size: 3em;
+}
+a {
+    color: #00a7cf!important;
 }
 p {
 	margin: 0.5em;
