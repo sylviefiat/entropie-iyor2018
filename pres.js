@@ -11,28 +11,43 @@ var videoArray = [];
 var currentVideo = 0;
 var direction = 1;
 var $sl, interval;
+var imgWidth = 824, imgHeught=481;
+var projectSlide = 4;
 
 
 function slidit(container, delta){	
+	var startX = ($(window).width()-imgWidth)/2;
   	var max = -(container.width() - $(window).width());
 	// new position = old position + deltaY
 	var posX = container.offset().left -= delta;
-	    // boundaries calculation
-	    if(posX >= 0) { posX = max;}
-	    if(posX <= max) { posX = 0;}
-	    // update position
-	    container.offset({left: posX});  	
+	//console.log(max);
+	//console.log(posX);
+	// boundaries calculation
+	if(posX >= startX) { posX = max-startX; console.log(max) }
+	if(posX <= max-startX-30) { posX = startX}
+	// update position
+	container.offset({left: posX});
+	// display project metadata	
+	container.find("a").each(function(child, a){
+        var centerLine = $(window).width()/2;
+        var divStart = $(this).offset().left;
+        var divEnd = divStart + $(this).width();
+        if(divStart < centerLine && divEnd > centerLine){
+            $(this).find('.para').css('display','flex');
+        } else {
+            $(this).find('.para').css('display','none');
+        };
+    });
 };
 
 function startSlider(){
 	interval = setInterval(function()
     	{
-        	slidit($('.images'), $(window).width()/2);
-    	}, 5000);
+        	slidit($('.images'), imgWidth);
+    	}, 3000);
 }
 
 function stopSlider(){
-	console.log("stop");
 	clearInterval(interval);
 }
 
@@ -40,25 +55,31 @@ function positionSlide(slide) {
 	stopSlider();
 	// display background video on first slide only
 	$("#bgvid").css("display", (slide>1)?"none":"block");
+	// do not display left arrow on first slide
+	$(".arrow_left").css("display", (slide===1)?"none":"block");
 
-	if (slide > 0 && slide <= slideCount) {
+	//if (slide > 0 && slide <= slideCount) {
 		// remove previous slide
 		slideArray[currentSlide].fadeOut(500);
 		if(slideArray[currentSlide].find("iframe") && slideArray[currentSlide].find("iframe")[0]){
 			slideArray[currentSlide].find("iframe")[0].src="";
 		}
 		// new slide
-		currentSlide = slide;
+		currentSlide = (slide<=slideCount)?((slide>0)?slide:slideCount):1;
+
 		slideArray[currentSlide].fadeIn(1500, 'swing');
 		if(slideArray[currentSlide].find("iframe") && slideArray[currentSlide].find("iframe")[0]){
-			currentVideo++;
+			currentVideo=currentSlide-projectSlide;
 			slideArray[currentSlide].find("iframe")[0].src = videoArray[currentVideo];	
 		} else {
 			currentVideo=0;
 		}
-	}
+	//}
 
-	if(slide === 3){
+	if(slide === projectSlide){
+		$('.images').css('margin-left',($(window).width()-imgWidth)/2);
+		$('.images').css('margin-right',($(window).width()-imgWidth)/2);
+		$('.acant').find('.para').css('display','flex');
 		startSlider();
     	$('.images').hover(function(){
 		    stopSlider();
@@ -69,7 +90,7 @@ function positionSlide(slide) {
 
 }
 
-function nextSlide() {
+function nextSlide() {	
 	positionSlide(currentSlide + 1);
 }
 
@@ -114,7 +135,7 @@ $(function() {
 });
 
 document.addEventListener("wheel", function (e) {
-	if(currentSlide !== 3)
+	if(currentSlide !== projectSlide)
 	{
 		if(e.deltaY < 0)
 			prevSlide();
@@ -124,6 +145,4 @@ document.addEventListener("wheel", function (e) {
 		slidit($('.images'), e.deltaY);
 	}
 }, true);
-
-
 
