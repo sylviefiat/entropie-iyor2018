@@ -11,7 +11,7 @@ var videoArray = [];
 var currentVideo = 0;
 var direction = 1;
 var $sl, interval;
-var imgWidth = 824, imgHeught=481;
+var imgWidth = 824, imgHeight=481;
 var projectSlide = 4;
 
 
@@ -54,27 +54,30 @@ function stopSlider(){
 function positionSlide(slide) {
 	stopSlider();
 	// display background video on first slide only
-	$("#bgvid").css("display", (slide>1)?"none":"block");
+	//$("#bgvid").css("display", (slide>1)?"none":"block");
 	// do not display left arrow on first slide
-	$(".arrow_left").css("display", (slide===1)?"none":"block");
+	//$(".arrow_left").css("display", (slide===1)?"none":"block");
 
-	//if (slide > 0 && slide <= slideCount) {
-		// remove previous slide
-		slideArray[currentSlide].fadeOut(500);
-		if(slideArray[currentSlide].find("iframe") && slideArray[currentSlide].find("iframe")[0]){
-			slideArray[currentSlide].find("iframe")[0].src="";
-		}
-		// new slide
-		currentSlide = (slide<=slideCount)?((slide>0)?slide:slideCount):1;
+	slideArray[currentSlide].fadeOut(500);
+	if(slideArray[currentSlide].find("iframe") && slideArray[currentSlide].find("iframe")[0]){
+		slideArray[currentSlide].find("iframe")[0].src="";
+	}
 
-		slideArray[currentSlide].fadeIn(1500, 'swing');
-		if(slideArray[currentSlide].find("iframe") && slideArray[currentSlide].find("iframe")[0]){
-			currentVideo=currentSlide-projectSlide;
-			slideArray[currentSlide].find("iframe")[0].src = videoArray[currentVideo];	
-		} else {
-			currentVideo=0;
-		}
-	//}
+	// new slide
+	currentSlide = (slide<=slideCount)?((slide>0)?slide:slideCount):1;
+
+	// display background video on first slide only
+	$("#bgvid").css("display", (currentSlide>1)?"none":"block");
+	// do not display left arrow on first slide
+	$(".arrow_left").css("display", (currentSlide===1)?"none":"block");
+
+	slideArray[currentSlide].fadeIn(1500, 'swing');
+	if(slideArray[currentSlide].find("iframe") && slideArray[currentSlide].find("iframe")[0]){
+		currentVideo=currentSlide-projectSlide;
+		slideArray[currentSlide].find("iframe")[0].src = videoArray[currentVideo];	
+	} else {
+		currentVideo=0;
+	}
 
 	if(slide === projectSlide){
 		$('.images').css('margin-left',($(window).width()-imgWidth)/2);
@@ -118,6 +121,8 @@ var handleKeyup = function(e) {
 };
 
 $(function() {
+	imgWidth = $(".img0").width();
+	imgHeight = $(".img0").height();
 	// slide loading in array
 	$(".slide").each(function () {
 		slideCount++;
