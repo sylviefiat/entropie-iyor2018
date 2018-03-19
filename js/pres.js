@@ -23,7 +23,7 @@ function slidit(container, delta){
 	//console.log(max);
 	//console.log(posX);
 	// boundaries calculation
-	if(posX >= startX) { posX = max-startX; console.log(max) }
+	if(posX >= startX) { posX = max-startX; }
 	if(posX <= max-startX-30) { posX = startX}
 	// update position
 	container.offset({left: posX});
