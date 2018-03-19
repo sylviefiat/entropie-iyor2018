@@ -1,4 +1,4 @@
-@media (min-width: 320px) and (max-width: 620px) {
+@media (min-width: 320px) {
 /* Default configuration is Extra small devices (phones, 600px and down) */
     body {
     	overflow: hidden;
