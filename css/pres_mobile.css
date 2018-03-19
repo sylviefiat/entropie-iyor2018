@@ -1,4 +1,4 @@
-@media (min-width: 320px) {
+/*@media only screen and (min-width: 200px) and (max-width: 620px) {*/
 /* Default configuration is Extra small devices (phones, 600px and down) */
     body {
     	overflow: hidden;
@@ -44,6 +44,9 @@
     .intro img {
         max-width: 100vw;
         max-height: 50vw;
+    }
+    .project {
+        flex-direction: column;
     }
     .half {
         width: 100%;
@@ -212,4 +215,4 @@
     }
 
     
-}
+/*}*/
