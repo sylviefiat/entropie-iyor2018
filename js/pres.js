@@ -2,18 +2,18 @@
  * Adapted from https://github.com/zgrossbart/htmlpresent
  */
 
+var hash = window.location.hash.substr(1);
 var slideCount = 0;
-var slideProject = 4;
 var slideArray = [];
-var currentSlide = 1;
+var currentSlide = (hash!=='')?hash:'home';
 var videoCount = 0;
 var videoArray = [];
-var currentVideo = 0;
+var currentVideo = '';
 var direction = 1;
 var $sl, interval;
 var imgWidth = 824, imgHeight=481;
-var projectSlide = 4;
-
+var projectSlide = 'projets';
+var keys ;
 
 function slidit(container, delta){	
 	var startX = ($(window).width()-imgWidth)/2;
@@ -52,25 +52,26 @@ function stopSlider(){
 function positionSlide(slide) {
 	stopSlider();
 
-	slideArray[currentSlide].fadeOut(500);
-	if(slideArray[currentSlide].find("iframe") && slideArray[currentSlide].find("iframe")[0]){
-		slideArray[currentSlide].find("iframe")[0].src="";
+	if(currentSlide!==slide){
+		slideArray[currentSlide].fadeOut(500);
+		if(slideArray[currentSlide].find("iframe") && slideArray[currentSlide].find("iframe")[0]){
+			slideArray[currentSlide].find("iframe")[0].src="";
+		}
 	}
-
 	// new slide
-	currentSlide = (slide<=slideCount)?((slide>0)?slide:slideCount):1;
-
+	//currentSlide = (keys.indexOf(slide)<=slideCount)?((slide!=='home')?slide:keys[slideCount]):'home';
+	currentSlide = slide;
 	// display background video on first slide only
-	$("#bgvid").css("display", (currentSlide>1)?"none":"block");
+	$("#bgvid").css("display", (currentSlide!=='home')?"none":"block");
 	// do not display left arrow on first slide
-	$(".arrow_left").css("display", (currentSlide===1)?"none":"block");
+	$(".arrow_left").css("display", (currentSlide==='home')?"none":"block");
 
 	slideArray[currentSlide].fadeIn(1500, 'swing');
 	if(slideArray[currentSlide].find("iframe") && slideArray[currentSlide].find("iframe")[0]){
-		currentVideo=currentSlide-projectSlide;
+		currentVideo=currentSlide+"-video";
 		slideArray[currentSlide].find("iframe")[0].src = videoArray[currentVideo];	
 	} else {
-		currentVideo=0;
+		currentVideo='';
 	}
 
 	if(slide === projectSlide){
@@ -89,11 +90,13 @@ function positionSlide(slide) {
 }
 
 function nextSlide() {	
-	positionSlide(currentSlide + 1);
+	let i = keys.indexOf(currentSlide) === (slideCount-1) ? 0:keys.indexOf(currentSlide)+1;
+	positionSlide(keys[i]);
 }
 
 function prevSlide() {
-	positionSlide(currentSlide - 1);
+	let i = keys.indexOf(currentSlide) === 0 ? (slideCount-1):keys.indexOf(currentSlide)-1;
+	positionSlide(keys[i]);
 }
 
 var handleKeyup = function(e) {
@@ -107,10 +110,10 @@ var handleKeyup = function(e) {
 			nextSlide();
 			return false;
 		case 35: // end key
-			positionSlide(slideCount);
+			positionSlide('end');
 			return false;
 		case 36: // home key
-			positionSlide(1);
+			positionSlide('home');
 			return false;
 	}
 };
@@ -122,16 +125,22 @@ $(function() {
 	$(".slide").each(function () {
 		slideCount++;
 		$(this).css("display", "none");
-		slideArray[slideCount] = $(this);
+		//slideArray[slideCount] = $(this);
+		slideArray[$(this).attr('id')] = $(this);
 	});
+	keys = Object.keys(slideArray);
 	$(document).keyup(handleKeyup);
-	slideArray[currentSlide].css("display", "flex");
+
 	// video url in array
 	$(".video").each(function () {
 		videoCount++;
-		videoArray[videoCount]=$(this).find("iframe")[0].src;
+		//videoArray[videoCount]=$(this).find("iframe")[0].src;
+		videoArray[$(this).attr('id')]=$(this).find("iframe")[0].src;
 		$(this).find("iframe")[0].src = null;
 	});
+
+	positionSlide(currentSlide);
+	
 });
 
 document.addEventListener("wheel", function (e) {
