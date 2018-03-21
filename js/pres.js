@@ -20,8 +20,6 @@ function slidit(container, delta){
   	var max = -(container.width() - $(window).width());
 	// new position = old position + deltaY
 	var posX = container.offset().left -= delta;
-	//console.log(max);
-	//console.log(posX);
 	// boundaries calculation
 	if(posX >= startX) { posX = max-startX; }
 	if(posX <= max-startX-30) { posX = startX}
@@ -53,10 +51,6 @@ function stopSlider(){
 
 function positionSlide(slide) {
 	stopSlider();
-	// display background video on first slide only
-	//$("#bgvid").css("display", (slide>1)?"none":"block");
-	// do not display left arrow on first slide
-	//$(".arrow_left").css("display", (slide===1)?"none":"block");
 
 	slideArray[currentSlide].fadeOut(500);
 	if(slideArray[currentSlide].find("iframe") && slideArray[currentSlide].find("iframe")[0]){
@@ -80,8 +74,8 @@ function positionSlide(slide) {
 	}
 
 	if(slide === projectSlide){
+		imgWidth = $(".img0").width();
 		$('.images').css('margin-left',($(window).width()-imgWidth)/2);
-		$('.images').css('margin-right',($(window).width()-imgWidth)/2);
 		$('.acant').find('.para').css('display','flex');
 		startSlider();
     	$('.images').hover(function(){
@@ -89,6 +83,7 @@ function positionSlide(slide) {
 		    }, function(){
 		    startSlider();
 		});
+		$('.images').css('margin-right',($(window).width()-imgWidth)/2);
 	}
 
 }
