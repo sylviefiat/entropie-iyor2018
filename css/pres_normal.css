@@ -140,6 +140,7 @@
     }
     .video{
         padding:0;
+        height: 100%;
     }
     .video iframe {
         width: 100%;
