@@ -192,7 +192,7 @@ $(function() {
 
 	positionSlide(currentSlide);
 
-	runDiapo();
+	interval1 = setInterval(runDiapo, 10000);
 	
 });
 
