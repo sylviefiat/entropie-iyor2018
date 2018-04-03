@@ -127,21 +127,21 @@ function getTime(){
 		case 'projects':
 			return 60000;
 		case 'oreanet':
-			return 1112000; // 18min32
+			return 300000; // 18min32
 		case 'blanco':
-			return 327000; //5min27
+			return 300000; //5min27
 		case 'apex':
-			return 1380000; //23min
+			return 300000; //23min
 		case 'carioca':
-			return 536000; //8min56
+			return 300000; //8min56
 		case 'cocaunut':
-			return 441000; //7min21
+			return 300000; //7min21
 		case 'resocorail':
-			return 942000; // 15min 42
+			return 300000; // 15min 42
 		case 'planactiondugong':
-			return 1589000; // 26min 29
+			return 300000; // 26min 29
 		case 'pristine':
-			return 1259000; // 20min 59
+			return 300000; // 20min 59
 		case 'home':
 		case 'end':
 		default:
