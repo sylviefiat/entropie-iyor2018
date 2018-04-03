@@ -118,6 +118,19 @@ var handleKeyup = function(e) {
 	}
 };
 
+
+
+function startDiapo(){
+	interval1 = setInterval(function()
+    	{
+        	nextSlide();
+    	}, 10000);
+}
+
+function stopDiapo(){
+	clearInterval(interval1);
+}
+
 $(function() {
 	imgWidth = $(".img0").width();
 	imgHeight = $(".img0").height();
@@ -140,6 +153,8 @@ $(function() {
 	});
 
 	positionSlide(currentSlide);
+
+	startDiapo();
 	
 });
 
