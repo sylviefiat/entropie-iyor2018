@@ -10,7 +10,7 @@ var videoCount = 0;
 var videoArray = [];
 var currentVideo = '';
 var direction = 1;
-var $sl, interval;
+var $sl, interval, interval1;
 var imgWidth = 824, imgHeight=481;
 var projectSlide = 'projets';
 var keys ;
@@ -118,10 +118,47 @@ var handleKeyup = function(e) {
 	}
 };
 
+function getTime(){
+	switch(currentSlide){
+		case 'yior':
+		case 'entropie':		
+		case 'pathogen':
+			return 30000;
+		case 'projects':
+			return 60000;
+		case 'oreanet':
+			return 1112000; // 18min32
+		case 'blanco':
+			return 327000; //5min27
+		case 'apex':
+			return 1380000; //23min
+		case 'carioca':
+			return 536000; //8min56
+		case 'cocaunut':
+			return 441000; //7min21
+		case 'resocorail':
+			return 942000; // 15min 42
+		case 'planactiondugong':
+			return 1589000; // 26min 29
+		case 'pristine':
+			return 1259000; // 20min 59
+		case 'home':
+		case 'end':
+		default:
+			return 10000;
+	}
+}
 
+function runDiapo(){	
+	stopDiapo();
+	nextSlide();
+	var time = getTime();
+	interval1 = setInterval(runDiapo, time);
+}
 
-function startDiapo(){
-	var time = 60000;
+function startDiapo(time){
+	
+
 	interval1 = setInterval(function()
     	{    		
         	nextSlide();
@@ -155,7 +192,7 @@ $(function() {
 
 	positionSlide(currentSlide);
 
-	startDiapo();
+	runDiapo();
 	
 });
 
