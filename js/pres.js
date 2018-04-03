@@ -121,10 +121,11 @@ var handleKeyup = function(e) {
 
 
 function startDiapo(){
+	var time = 60000;
 	interval1 = setInterval(function()
-    	{
+    	{    		
         	nextSlide();
-    	}, 10000);
+    	}, time);
 }
 
 function stopDiapo(){
