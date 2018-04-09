@@ -144,7 +144,7 @@ function getTime(){
 		case 'pristine':
 			return 300000; // 20min 59
 		case 'macadam':
-			return 140000; // 2min 20
+			return 130000; // 2min 20
 		case 'where':
 			return 60000; // 0min 58
 		case 'home':
