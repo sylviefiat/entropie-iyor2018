@@ -119,6 +119,7 @@ var handleKeyup = function(e) {
 };
 
 function getTime(){
+	console.log(currentSlide);
 	switch(currentSlide){
 		case 'yior':
 		case 'entropie':		
@@ -134,14 +135,18 @@ function getTime(){
 			return 300000; //23min
 		case 'carioca':
 			return 300000; //8min56
-		case 'cocaunut':
-			return 300000; //7min21
+		case 'coca':
+			return 60000; //1min01
 		case 'resocorail':
 			return 300000; // 15min 42
 		case 'planactiondugong':
 			return 300000; // 26min 29
 		case 'pristine':
 			return 300000; // 20min 59
+		case 'macadam':
+			return 140000; // 2min 20
+		case 'where':
+			return 60000; // 0min 58
 		case 'home':
 		case 'end':
 		default:
@@ -191,8 +196,8 @@ $(function() {
 	});
 
 	positionSlide(currentSlide);
-
-	interval1 = setInterval(runDiapo, 10000);
+	let t1 = getTime();
+	interval1 = setInterval(runDiapo, t1);
 	
 });
 
