@@ -147,6 +147,8 @@ function getTime(){
 			return 130000; // 2min 20
 		case 'where':
 			return 60000; // 0min 58
+		case 'photogrammetrie':
+			return 40000; // 0min 40
 		case 'home':
 		case 'end':
 		default:

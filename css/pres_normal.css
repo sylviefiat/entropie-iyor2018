@@ -88,12 +88,12 @@
     .rightonlarge {
         text-align: right;
     }
-    .acant, .cora, .req, .suc, .alg, .metx, .mare, .dug, .pris,.whe,.maca {
+    .acant, .cora, .req, .suc, .alg, .metx, .mare, .dug, .pris,.whe,.maca, .photogram {
         position: relative;
     }
     .acant:hover .acanthaster,.cora:hover .corail,.req:hover .requin,.suc:hover .super,.alg:hover .algae,
     .nutri:hover .nutrition, mare:hover .mareco, dug:hover .dugong, pris:hover pristine,
-    .metx:hover .metaux, .whe:hover where, .maca:hover macadam {
+    .metx:hover .metaux, .whe:hover where, .maca:hover macadam, .photogram:hover photogrammetrie {
         display: flex;
     }
     .para {
